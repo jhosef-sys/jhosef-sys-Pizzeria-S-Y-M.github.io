@@ -10,15 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let touchStartX = null;
 
   const render = () => {
+    const isMobile = window.matchMedia('(max-width: 600px)').matches;
+
     cards.forEach((card, index) => {
       const offset = (index - activeIndex + cards.length + Math.floor(cards.length / 2)) % cards.length
         - Math.floor(cards.length / 2);
-      const visible = Math.abs(offset) <= 2;
+      const visible = Math.abs(offset) <= (isMobile ? 1 : 2);
       const active = offset === 0;
       const side = Math.abs(offset) === 1;
-      const translate = offset * (side ? 76 : 122);
+      const translate = offset * (isMobile ? 94 : side ? 76 : 122);
       const scale = active ? 1 : side ? 0.82 : 0.68;
-      const rotation = active ? 0 : offset < 0 ? 28 : -28;
+      const rotation = active ? 0 : isMobile ? (offset < 0 ? 14 : -14) : offset < 0 ? 28 : -28;
 
       card.classList.toggle('is-active', active);
       card.classList.toggle('is-neighbor', side);
@@ -57,6 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
   stage.addEventListener('pointercancel', () => {
     touchStartX = null;
   });
+
+  window.addEventListener('resize', render, { passive: true });
 
   render();
 });

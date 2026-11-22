@@ -1,16 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const catalog = document.getElementById('catalogo');
-  const toppings = document.getElementById('toppings');
-  const contact = document.getElementById('contacto');
-  const flavors = ['Pollo', 'Carne (cortada a cuchillo)', 'Jamón y queso'];
-  const pizzaStyles = [
-    { name: 'Muzzarella', price: '$12.000' },
-    { name: 'Doble muzza', price: '$15.000' },
-    { name: 'Tomate', price: '$15.000' },
-    { name: 'Huevo', price: '$15.000' },
-    { name: 'Jamón y morrón', price: '$15.000' },
-    { name: 'Papas fritas con cheddar y verdeo', price: '$18.000' }
-  ];
 
   const cards = [
     {
@@ -91,79 +80,4 @@ if (catalog) {
     catalog.appendChild(paymentPromo);
   }
 
-  if (toppings) {
-    const infoPanels = [
-      {
-        title: 'Variedades de empanadas',
-        items: flavors,
-        type: 'default'
-      },
-      {
-        title: 'Las pizzas pueden ser',
-        items: pizzaStyles,
-        type: 'pizza'
-      }
-    ];
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'info-grid';
-
-    infoPanels.forEach((panel) => {
-      const panelEl = document.createElement('div');
-      panelEl.className = `info-panel ${panel.type === 'pizza' ? 'info-panel--pizza' : 'info-panel--empanadas'}`;
-      panelEl.innerHTML = panel.type === 'pizza'
-        ? `
-          <h3>${panel.title}</h3>
-          <ul class="info-list info-list--pizza">
-            ${panel.items.map((item) => `
-              <li>
-                <span class="info-bullet">•</span>
-                <span class="info-name">${item.name}</span>
-                <strong class="info-price">${item.price}</strong>
-              </li>
-            `).join('')}
-          </ul>
-        `
-        : `
-          <h3>${panel.title}</h3>
-          <ul class="info-list info-list--simple">
-            ${panel.items.map((item) => `<li>${item}</li>`).join('')}
-          </ul>
-        `;
-      wrapper.appendChild(panelEl);
-    });
-
-    toppings.appendChild(wrapper);
-  }
-
-  if (contact) {
-    contact.innerHTML = `
-      <div class="info-panel contact-box">
-        <div class="contact-box__content">
-          <div class="contact-box__details">
-            <div class="contact-box__label">Pedidos</div>
-            <h3 class="contact-box__title">Contáctanos su consulta no molesta</h3>
-            <div class="contact-box__meta">
-              <div class="contact-box__item">
-                <span class="contact-box__text">WhatsApp:</span>
-                <a href="https://wa.me/5491161976387?text=Hola%20quiero%20hacer%20mi%20pedido" target="_blank" rel="noopener noreferrer">11 56386563 - 1123491361</a>
-              </div>
-              <div class="contact-box__item">
-                <span class="contact-box__text">Llamanos:</span>
-                <a href="tel:+541156386563">+54 9 11 56386563</a>
-              </div>
-              <div class="contact-box__item">
-                <span class="contact-box__text">Dirección:</span>
-                <span>La Porteña 4675</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="contact-map" aria-label="Mapa de la dirección La Porteña 4675">
-           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13119.34629724788!2d-58.573565739080216!3d-34.70930172315595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc5fd9fd1fd6d%3A0xc3c6c3fccccf49b4!2sLa%20Porte%C3%B1a%204675%2C%20B1754EJG%20San%20Justo%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1793727052412!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-          </div>
-        </div>
-      </div>
-    `;
-  }
 });
